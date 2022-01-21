@@ -1,8 +1,10 @@
-version: '2'
+version: '3'
 
 services:
   ctfd:
-    build: .
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
     user: root
     restart: always
     ports:
@@ -25,16 +27,6 @@ services:
     networks:
         default:
         internal:
-
-  nginx:
-    image: nginx:1.17
-    restart: always
-    volumes:
-      - ./conf/nginx/http.conf:/etc/nginx/nginx.conf
-    ports:
-      - 80:80
-    depends_on:
-      - ctfd
 
   db:
     image: mariadb:10.4.12
