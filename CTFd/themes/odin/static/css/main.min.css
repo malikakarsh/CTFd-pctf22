@@ -2434,7 +2434,7 @@ textarea.form-control.is-invalid {
 .btn.focus,
 .btn:focus {
     outline: 0;
-    box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25)
+    box-shadow: 0 0 0 .2rem #005247 !important;
 }
 
 .btn.disabled,
@@ -2450,22 +2450,25 @@ fieldset:disabled a.btn {
 .btn-primary {
     color: #fff;
     background: transparent;
+
 }
 
 .btn-primary:hover {
     color: #fff;
+    background-color: #005247 !important;
+    box-shadow: 0px 0px 52px 15px #005247 !important;
 }
 
 .btn-primary.focus,
 .btn-primary:focus {
-    box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .5)
+    box-shadow: 0 0 0 .2rem #005247 !important;
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff
+    background-color: #005247;
+    border-color: #005247
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
@@ -2477,7 +2480,7 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .5)
+    box-shadow: 0 0 0 .2rem #005247 !important
 }
 
 .btn-secondary {
@@ -4182,7 +4185,7 @@ input[type=submit].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
     color: #fff;
-    background-color: #007bff
+    background-color: #005247
 }
 
 .nav-fill .nav-item {
@@ -4960,7 +4963,7 @@ a.badge:hover {
 
 .badge-primary {
     color: #fff;
-    background-color: #007bff
+    background-color: #005247
 }
 
 a.badge-primary:focus,
@@ -6479,7 +6482,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-    background-color: #007bff!important
+    background-color: #007bff !important
 }
 
 a.bg-primary:focus,
@@ -6552,11 +6555,11 @@ a.bg-light:focus,
 a.bg-light:hover,
 button.bg-light:focus,
 button.bg-light:hover {
-    background-color: #dae0e5!important
+    background-color: #dae0e5!important;
 }
 
 .bg-dark {
-    background-color: #071625 !important
+    background-color: #005247 !important;
 }
 
 a.bg-dark:focus,

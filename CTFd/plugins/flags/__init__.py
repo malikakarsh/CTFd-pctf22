@@ -1,7 +1,7 @@
 import re
 
 from CTFd.plugins import register_plugin_assets_directory
-
+from CTFd.utils.crypto import verify_password
 
 class FlagException(Exception):
     def __init__(self, message):
@@ -32,17 +32,10 @@ class CTFdStaticFlag(BaseFlag):
         saved = chal_key_obj.content
         data = chal_key_obj.data
 
-        if len(saved) != len(provided):
-            return False
-        result = 0
-
-        if data == "case_insensitive":
-            for x, y in zip(saved.lower(), provided.lower()):
-                result |= ord(x) ^ ord(y)
+        if verify_password(provided, saved):
+            return True
         else:
-            for x, y in zip(saved, provided):
-                result |= ord(x) ^ ord(y)
-        return result == 0
+            return False
 
 
 class CTFdRegexFlag(BaseFlag):

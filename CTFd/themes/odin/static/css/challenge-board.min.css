@@ -18,19 +18,31 @@
 
 .badge-info,
 .btn-info {
-    background-color: #5b7290
+    background-color: #005247 !important;
+}
+/* #004e52 */
+/* #08cc36 */
+.challenge-button {
+    border: solid 1px #005247;
+    background-color: transparent !important;
+    box-shadow: 0px 0px 52px 2px #005247 !important;
 }
 
-.challenge-button {
-    border: solid 1px #062341;
+.challenge-submit{
     background-color: transparent !important;
-    box-shadow: 0px 0px 52px 2px #0b3863;
+    
+}
+
+.challenge-submit:hover{
+    background-color: #005247 !important;
+    border: solid 1px #fff !important;
+    box-shadow: 0px 0px 52px 2px #005247 !important;
 }
 
 .solved-challenge {
-    border: solid 1px #062341;
+    border: solid 1px #005247;
     background-color: transparent !important;
-    box-shadow: 0px 0px 52px 2px #0b3863;
+    box-shadow: 0px 0px 52px 2px #005247;
 }
 
 .corner-button-check {
@@ -38,7 +50,7 @@
     margin-right: 25px;
     position: absolute;
     right: 0;
-    color: rgb(51, 64, 185);
+    color: rgb(51, 185, 69);
 }
 
 .key-submit .btn {

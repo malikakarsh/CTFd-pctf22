@@ -12,6 +12,7 @@ from CTFd.plugins.flags import FLAG_CLASSES, get_flag_class
 from CTFd.schemas.flags import FlagSchema
 from CTFd.utils.decorators import admins_only
 from CTFd.utils.helpers.models import build_model_filters
+from passlib.hash import bcrypt_sha256
 
 flags_namespace = Namespace("flags", description="Endpoint to retrieve Flags")
 
@@ -91,6 +92,7 @@ class FlagList(Resource):
     def post(self):
         req = request.get_json()
         schema = FlagSchema()
+        req["content"]=bcrypt_sha256.hash(str(req["content"]))
         response = schema.load(req, session=db.session)
 
         if response.errors:

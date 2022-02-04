@@ -38,7 +38,7 @@ def confirm(data=None):
     # User is confirming email account
     if data and request.method == "GET":
         try:
-            user_email = unserialize(data, max_age=1800)
+            user_email = unserialize(data, max_age=3600)
         except (BadTimeSignature, SignatureExpired):
             return render_template(
                 "confirm.html", errors=["Your confirmation link has expired"]
@@ -107,7 +107,7 @@ def reset_password(data=None):
 
     if data is not None:
         try:
-            email_address = unserialize(data, max_age=1800)
+            email_address = unserialize(data, max_age=3600)
         except (BadTimeSignature, SignatureExpired):
             return render_template(
                 "reset_password.html", errors=["Your link has expired"]
