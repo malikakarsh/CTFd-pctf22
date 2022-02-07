@@ -77,18 +77,18 @@ class FilesystemUploader(BaseUploader):
 class S3Uploader(BaseUploader):
     def __init__(self):
         super(BaseUploader, self).__init__()
+        self.endpoint = get_app_config("AWS_S3_ENDPOINT_URL")
         self.s3 = self._get_s3_connection()
         self.bucket = get_app_config("AWS_S3_BUCKET")
 
     def _get_s3_connection(self):
         access_key = get_app_config("AWS_ACCESS_KEY_ID")
         secret_key = get_app_config("AWS_SECRET_ACCESS_KEY")
-        endpoint = get_app_config("AWS_S3_ENDPOINT_URL")
         client = boto3.client(
             "s3",
             aws_access_key_id=access_key,
             aws_secret_access_key=secret_key,
-            endpoint_url=endpoint,
+            endpoint_url=self.endpoint,
         )
         return client
 
@@ -117,16 +117,19 @@ class S3Uploader(BaseUploader):
     def download(self, filename):
         key = filename
         filename = filename.split("/").pop()
-        url = self.s3.generate_presigned_url(
-            "get_object",
-            Params={
-                "Bucket": self.bucket,
-                "Key": key,
-                "ResponseContentDisposition": "attachment; filename={}".format(
-                    filename
-                ),
-            },
-        )
+        # url = self.s3.generate_presigned_url(
+        #     "get_object",
+        #     Params={
+        #         "Bucket": self.bucket,
+        #         "Key": key,
+        #         "ResponseContentDisposition": "attachment; filename={}".format(
+        #             filename
+        #         ),
+        #     },
+        # )
+        url = self.endpoint + "/" + self.bucket + "/" + key
+        print(filename, url, key)
+
         return redirect(url)
 
     def delete(self, filename):
@@ -136,7 +139,8 @@ class S3Uploader(BaseUploader):
     def sync(self):
         local_folder = current_app.config.get("UPLOAD_FOLDER")
         # If the bucket is empty then Contents will not be in the response
-        bucket_list = self.s3.list_objects(Bucket=self.bucket).get("Contents", [])
+        bucket_list = self.s3.list_objects(
+            Bucket=self.bucket).get("Contents", [])
 
         for s3_key in bucket_list:
             s3_object = s3_key["Key"]
