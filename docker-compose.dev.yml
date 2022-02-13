@@ -14,37 +14,43 @@ services:
     volumes:
       - .data/CTFd/logs:/var/log/CTFd
       - .:/opt/CTFd
+    depends_on:
+      - db
+    networks:
+      default:
+      internal:
 
-#    depends_on:
-#      - db
-#    networks:
-#        default:
-#        internal:
+  db:
+    image: mariadb:10.4.12
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=ctfd
+      - MYSQL_USER=ctfd
+      - MYSQL_PASSWORD=ctfd
+      - MYSQL_DATABASE=ctfd
+      - MYSQL_INITDB_SKIP_TZINFO=1
+    volumes:
+      - .data/mysql:/var/lib/mysql
+    networks:
+      internal: # This command is required to set important mariadb defaults
+    command:
+      [
+        mysqld,
+        --character-set-server=utf8mb4,
+        --collation-server=utf8mb4_unicode_ci,
+        --wait_timeout=28800,
+        --log-warnings=0
+      ]
 
-#  db:
-#    image: mariadb:10.4.12
-#    restart: always
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=ctfd
-#      - MYSQL_USER=ctfd
-#      - MYSQL_PASSWORD=ctfd
-#      - MYSQL_DATABASE=ctfd
-#    volumes:
-#      - .data/mysql:/var/lib/mysql
-#    networks:
-#        internal:
-#    # This command is required to set important mariadb defaults
-#    command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --wait_timeout=28800, --log-warnings=0]
+  cache:
+    image: redis:4
+    restart: always
+    volumes:
+      - .data/redis:/data
+    networks:
+      internal:
 
-#  cache:
-#    image: redis:4
-#    restart: always
-#    volumes:
-#    - .data/redis:/data
-#    networks:
-#        internal:
-
-#networks:
-#    default:
-#    internal:
-#        internal: true
+networks:
+  default:
+  internal:
+    internal: true

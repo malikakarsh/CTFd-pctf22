@@ -26,7 +26,8 @@ def get_current_user():
                 if request.content_type == "application/json":
                     error = 401
                 else:
-                    error = redirect(url_for("auth.login", next=request.full_path))
+                    error = redirect(
+                        url_for("auth.login", next=request.full_path))
                 abort(error)
 
         return user
@@ -158,12 +159,16 @@ def get_ip(req=None):
     trusted_proxies = app.config["TRUSTED_PROXIES"]
     combined = "(" + ")|(".join(trusted_proxies) + ")"
     route = req.access_route + [req.remote_addr]
+    # print("Route", route)
     for addr in reversed(route):
+        # print(combined, addr, re.match(combined, addr))
         if not re.match(combined, addr):  # IP is not trusted but we trust the proxies
             remote_addr = addr
             break
     else:
+        # print("Else Executed")
         remote_addr = req.remote_addr
+    # print("Remote Addr", remote_addr)
     return remote_addr
 
 
