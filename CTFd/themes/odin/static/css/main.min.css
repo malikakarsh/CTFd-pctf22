@@ -365,6 +365,7 @@ th {
 }
 
 label {
+    color: rgb(223, 219, 219);
     display: inline-block;
     margin-bottom: .5rem
 }
@@ -1589,7 +1590,7 @@ pre code {
 
 canvas {
     color: white !important;
-    background: white !important;
+    background: #4cad9f !important;
 }
 
 td {
@@ -2456,7 +2457,7 @@ fieldset:disabled a.btn {
 .btn-primary:hover {
     color: #fff;
     background-color: #005247 !important;
-    box-shadow: 0px 0px 52px 15px #005247 !important;
+    box-shadow: 0 0 52px .2rem #005247 !important;
 }
 
 .btn-primary.focus,
@@ -10944,7 +10945,7 @@ h2 {
 
 a {
     color: #337ab7;
-    text-decoration: none
+     text-decoration: none
 }
 
 table>thead>tr>td {
@@ -10958,6 +10959,14 @@ blockquote {
 
 .table thead th {
     white-space: nowrap
+}
+
+span{
+    color: hsla(0, 0%, 100%, .5);
+}
+
+span:hover{
+    color: hsla(0, 0%, 100%, .75);
 }
 
 .fa-spin.spinner,
@@ -11108,7 +11117,6 @@ h3,
 h4,
 h5,
 h6,
-a,
 p {
     color: white !important;
 }

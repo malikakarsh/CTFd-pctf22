@@ -28,6 +28,11 @@
     box-shadow: 0px 0px 52px 2px #005247 !important;
 }
 
+.challenge-button:hover {
+    border: solid 1px #049b87;
+    box-shadow: 5px 5px 70px 2px #005247 !important;
+}
+
 .challenge-submit{
     background-color: transparent !important;
     
@@ -36,7 +41,7 @@
 .challenge-submit:hover{
     background-color: #005247 !important;
     border: solid 1px #fff !important;
-    box-shadow: 0px 0px 52px 2px #005247 !important;
+    box-shadow: 0px 0px 60px 2px #005247 !important;
 }
 
 .solved-challenge {
