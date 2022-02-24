@@ -111,7 +111,7 @@ class S3Uploader(BaseUploader):
         md5hash = hexencode(os.urandom(16))
 
         dst = md5hash + "/" + filename
-        self.s3.upload_fileobj(file_obj, self.bucket, dst)
+        self.s3.upload_fileobj(file_obj, self.bucket, dst, ExtraArgs={'ACL':'public-read'})
         return dst
 
     def download(self, filename):

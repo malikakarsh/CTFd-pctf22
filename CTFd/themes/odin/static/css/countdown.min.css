@@ -1,0 +1,32 @@
+#countdown > *:is(.hour)::after {
+    font-size: 0.5em;
+    /* content: " hrs"; */
+}
+
+#countdown > *:is(.minute)::after {
+    font-size: 0.5em;
+    /* content: " min"; */
+}
+
+#countdown > *:is(.second)::after {
+    font-size: 0.5em;
+    /* content: " sec"; */
+}
+
+#countdown {
+    margin: auto;
+    font-size: 2em;
+    text-align: center;
+    color: #6C757D !important;
+}
+
+#countdown-phase {
+    margin-top: -1rem;
+    text-align: center;
+    color: #6C757D !important;
+}
+
+#countdown .desc {
+    font-size: 15px;
+    white-space: pre;
+}

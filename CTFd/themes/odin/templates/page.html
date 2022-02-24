@@ -1,7 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div class="container">
+<div class="container">
 	{{ content | safe }}
+
+	<div>
+		<p id="countdown-para">
+		<h3 id="countdown-phase"></h3>
+		<div id="countdown">
+			<span class="hour" style="color: #04a386">00</span>
+			<span class="desc" style="color: #04a386"> HRS </span>
+			<span class="minute" style="color: #04a386">00</span>
+			<span class="desc" style="color: #04a386"> MINS </span>
+			<span class="second" style="color: #04a386">00</span>
+			<span class="desc" style="color: #04a386"> SECS </span>
+		</div>
+		</p>
+
+		<link rel="stylesheet" href="{{ url_for('views.themes', path='css/countdown.css') }}">
+		<script src="{{ url_for('views.themes', path='js/countdown.js') }}"></script>
 	</div>
+</div>
 {% endblock %}

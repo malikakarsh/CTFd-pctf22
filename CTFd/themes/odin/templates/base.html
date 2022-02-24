@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>{{ Configs.ctf_name }}</title>
     <meta charset="utf-8">
@@ -18,13 +19,14 @@
             'csrfNonce': "{{ Session.nonce }}",
             'userMode': "{{ Configs.user_mode }}",
             'userId': {{ Session.id }},
-            'start': {{ Configs.start | tojson }},
-            'end': {{ Configs.end | tojson }},
-            'theme_settings': {{ Configs.theme_settings | tojson }}
+        'start': { { Configs.start | tojson } },
+        'end': { { Configs.end | tojson } },
+        'theme_settings': { { Configs.theme_settings | tojson } }
         }
     </script>
     {{ Configs.theme_header }}
 </head>
+
 <body>
     {% include "components/navbar.html" %}
 
@@ -35,7 +37,10 @@
 
     <footer class="footer">
         <div class="container flex-box text-center">
-                <small class="text-muted">Made with <span><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" style="text-decoration: none; color: red !important;">♥</a></span> by <a href="https://delta.nitt.edu/" style="text-decoration: none; color: #bfd6eb!important">Delta Force</a></small>
+            <small class="text-muted">Made with <span><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                        style="text-decoration: none; color: red !important;">♥</a></span> by <a
+                    href="https://delta.nitt.edu/" style="text-decoration: none; color: #bfd6eb!important">Delta
+                    Force</a></small>
         </div>
     </footer>
 
@@ -54,4 +59,5 @@
 
     {{ Configs.theme_footer }}
 </body>
+
 </html>

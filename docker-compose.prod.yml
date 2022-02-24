@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   ctfd:
@@ -9,57 +9,56 @@ services:
     restart: always
     ports:
       - "8000:8000"
-    environment:
-      - UPLOAD_PROVIDER=s3
-      - AWS_ACCESS_KEY_ID=GOOG1EB2LF64ZIHPKIOMHSH7SEBQAORMGUG7G5NMNBSEXP44MLTNZMAKXODNI
-      - AWS_SECRET_ACCESS_KEY=60OPbOggEHSd9QcH2bXuuT/QHHeVpc7zlfHs85hJ
-      - AWS_S3_BUCKET=pctf-bucket
-      - AWS_S3_ENDPOINT_URL=https://storage.googleapis.com
-      - DATABASE_URL=mysql+pymysql://root:lOFOHWL0oKLKwURHaiMjwywwV874CSz4B1v3amwSNCxmduyrTq@ctf.anirudhvs.xyz:9090/ctfd
-      - REDIS_URL=redis://:LOuQal3VPzopuNwnxeUsDtKNoecbEmyPbcunNK8JLChz2IwECt@ctf.anirudhvs.xyz:10000
-      - SECRET_KEY=randomstringtobeenteredhere
-      - WORKERS=1
-      - WORKER_CLASS=gevent
-      - TIMEOUT=60
-      - LOG_FOLDER=-
-      - ACCESS_LOG=-
-      - ERROR_LOG=-
-      - REVERSE_PROXY=true
+    env_file:
+      - .env
     volumes:
       - .data/CTFd/logs:/var/log/CTFd
       - .data/CTFd/uploads:/var/uploads
-      - .:/opt/CTFd:ro
+      - .:/opt/CTFd
 
-#    depends_on:
-#      - db
-#    networks:
-#        default:
-#        internal:
+    depends_on:
+      - db
+    networks:
+        default:
+        internal:
 
-#  db:
-#    image: mariadb:10.4.12
-#    restart: always
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=ctfd
-#      - MYSQL_USER=ctfd
-#      - MYSQL_PASSWORD=ctfd
-#      - MYSQL_DATABASE=ctfd
-#    volumes:
-#      - .data/mysql:/var/lib/mysql
-#    networks:
-#        internal:
-#    # This command is required to set important mariadb defaults
-#    command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --wait_timeout=28800, --log-warnings=0]
+  db:
+    image: mariadb:10.4.12
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=FcN2pgoYdnk1wo4A6GUlEXHqSmaL8CSZqmr5nIPj57kAnjl1KL
+      - MYSQL_USER=ctfd
+      - MYSQL_PASSWORD=FcN2pgoYdnk1wo4A6GUlEXHqSmaL8CSZqmr5nIPj57kAnjl1KL
+      - MYSQL_DATABASE=ctfd
+    volumes:
+      - .data/mysql:/var/lib/mysql
+    # networks:
+    #     internal:
+    # This command is required to set important mariadb defaults
+    command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --wait_timeout=28800, --log-warnings=0]
 
-#  cache:
-#    image: redis:4
-#    restart: always
-#    volumes:
-#    - .data/redis:/data
-#    networks:
-#        internal:
+  cache:
+    image: redis:4
+    restart: always
+    command: redis-server --requirepass Qfqp9ZzT9ySotMDziyZcOMtgXkLWPHMOf6F75thKdRbzRTIQhu
+    volumes:
+    - .data/redis:/data
+    # networks:
+    #     internal:
 
-#networks:
-#    default:
-#    internal:
-#        internal: true
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: pma
+    restart: always
+    ports:
+      - 9091:80
+    depends_on: 
+      - db
+    environment:
+      - PMA_HOST=db
+
+
+networks:
+   default:
+   internal:
+       internal: true
