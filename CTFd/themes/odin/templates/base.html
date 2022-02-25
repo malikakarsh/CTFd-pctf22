@@ -19,9 +19,9 @@
             'csrfNonce': "{{ Session.nonce }}",
             'userMode': "{{ Configs.user_mode }}",
             'userId': {{ Session.id }},
-        'start': { { Configs.start | tojson } },
-        'end': { { Configs.end | tojson } },
-        'theme_settings': { { Configs.theme_settings | tojson } }
+        'start': {{ Configs.start | tojson }},
+        'end': {{ Configs.end | tojson }},
+        'theme_settings': {{ Configs.theme_settings | tojson }}
         }
     </script>
     {{ Configs.theme_header }}
@@ -37,10 +37,7 @@
 
     <footer class="footer">
         <div class="container flex-box text-center">
-            <small class="text-muted">Made with <span><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                        style="text-decoration: none; color: red !important;">♥</a></span> by <a
-                    href="https://delta.nitt.edu/" style="text-decoration: none; color: #bfd6eb!important">Delta
-                    Force</a></small>
+            <small class="text-muted" style="color: grey !important"><a href="https://pragyan.org" style="text-decoration: none; color: grey !important">Pragyan</a>  CTF '22</small>
         </div>
     </footer>
 

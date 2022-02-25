@@ -15,7 +15,7 @@
 
 #countdown {
     margin: auto;
-    font-size: 2em;
+    font-size: 2.5em;
     text-align: center;
     color: #6C757D !important;
 }
@@ -23,10 +23,16 @@
 #countdown-phase {
     margin-top: -1rem;
     text-align: center;
-    color: #6C757D !important;
+    color: #dab202 !important;
 }
 
 #countdown .desc {
     font-size: 15px;
     white-space: pre;
+}
+
+@media only screen and (max-width: 600px) {
+  #countdown {
+      font-size: 1rem;
+  }
 }
