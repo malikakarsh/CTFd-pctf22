@@ -1,0 +1,63 @@
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+name: pctf-ctfd
+region: blr
+services:
+  - envs:
+      - key: UPLOAD_PROVIDER
+        scope: RUN_AND_BUILD_TIME
+        value: s3
+      - key: AWS_ACCESS_KEY_ID
+        scope: RUN_AND_BUILD_TIME
+        value: BUXM2NUP5UXYOZK2NTDT
+      - key: AWS_SECRET_ACCESS_KEY
+        scope: RUN_AND_BUILD_TIME
+        value: NkISUtUHZbNmTVTqY5qy7VokpccGaAXZGD2/00tEwpc
+      - key: AWS_S3_BUCKET
+        scope: RUN_AND_BUILD_TIME
+        value: pragyan-cloud-storage
+      - key: DATABASE_URL
+        scope: RUN_AND_BUILD_TIME
+        value: mysql+pymysql://root:lOFOHWL0oKLKwURHaiMjwywwV874CSz4B1v3amwSNCxmduyrTq@174.138.123.41:12000/ctfd
+      - key: REDIS_URL
+        scope: RUN_AND_BUILD_TIME
+        value: redis://:LOuQal3VPzopuNwnxeUsDtKNoecbEmyPbcunNK8JLChz2IwECt@174.138.123.41:13000
+      - key: SECRET_KEY
+        scope: RUN_AND_BUILD_TIME
+        value: NdQYPzayUXSeiGwyyEvDMsk1RJ2C7SRH2ogaKjcHePnoSUpQFS
+      - key: WORKERS
+        scope: RUN_AND_BUILD_TIME
+        value: "5"
+      - key: TIMEOUT
+        scope: RUN_AND_BUILD_TIME
+        value: "60"
+      - key: PORT
+        scope: RUN_AND_BUILD_TIME
+        value: "8080"
+      - key: LOG_FOLDER
+        scope: RUN_AND_BUILD_TIME
+        value: "-"
+      - key: ACCESS_LOG
+        scope: RUN_AND_BUILD_TIME
+        value: "-"
+      - key: ERROR_LOG
+        scope: RUN_AND_BUILD_TIME
+        value: "-"
+      - key: REVERSE_PROXY
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: AWS_S3_ENDPOINT_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://sgp1.digitaloceanspaces.com
+    http_port: 8080
+    image:
+      registry_type: DOCR
+      repository: ctfd
+      tag: deployment1
+    instance_count: 6
+    instance_size_slug: professional-xs
+    name: pctf-ctfd
+    routes:
+      - path: /
+    source_dir: /

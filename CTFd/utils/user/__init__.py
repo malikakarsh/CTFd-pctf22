@@ -156,10 +156,14 @@ def get_ip(req=None):
     """
     if req is None:
         req = request
+    # print("Printing all headers", dict(req.headers))
     trusted_proxies = app.config["TRUSTED_PROXIES"]
     combined = "(" + ")|(".join(trusted_proxies) + ")"
     route = req.access_route + [req.remote_addr]
     # print("Route", route)
+    # following line was used to remove last 3 entries [haproxy node ip, cloudfare ip, cloudfare ip]
+    route = route[:-3]
+    # print("Updated route", route)
     for addr in reversed(route):
         # print(combined, addr, re.match(combined, addr))
         if not re.match(combined, addr):  # IP is not trusted but we trust the proxies
